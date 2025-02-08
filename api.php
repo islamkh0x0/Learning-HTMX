@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTMX</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-</head>
-<body class="bg-dark">
-    <div class="container">
-        <h1 class="text-white text-centre">HTMX</h1>
-        
-        <form hx-post="./api.php?action=add-post" hx-target=".posts" hx-swap="beforeend">
-            <input name="title" class="form-control mb-3">
-            <textarea name="content" class="form-control mb-3" rows="3"></textarea>
-            <button class="btn btn-primary">Add Post</button>
-        </form>
-        
-        <div class="row posts"></div>
+<?php
 
+switch($_GET['action']) {
+    case "add-post":
+
+?>
+<div class="col">
+    <div class="card mt-5" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $_POST['title'] ?></h5>
+            <p class="card-text"><?php echo $_POST['content'] ?></p>
+            <a href="#" class="btn btn-danger">Delet Post</a>
+            <a href="#" class="btn btn-success">Edit Post</a>
+        </div>
     </div>
-</body>
-</html>
+</div>
+<?php
+    break;
+    default:
+        echo "invalid action";
+}
+
+?>
